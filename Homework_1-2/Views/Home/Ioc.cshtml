@@ -4,6 +4,7 @@
 *@
 
 @inject Homework_1_2.Services.Hash.IHashService hashService
+@inject Homework_1_2.Services.FileName.IFileNameService fileNameService
 @{
     ViewData["Title"] = "Ioc";
 }
@@ -37,6 +38,7 @@
     hashCode (from controller) = @ViewData["hashCode"] <br />
     hashCode (from view) = @hashService.GetHashCode()
 </p>
+
 <h3>Сервіс генерації випадкових паролів (OTP - one time password)</h3>
 <p>
     password (otp4) = @ViewData["password"] <br />
@@ -54,4 +56,11 @@
     <code>AddSingleton</code> - об'єкт залишається незмінним максимально довго, навіть при оновленні сторінки. <br />
     <code>AddScoped</code> - об'єкт залишається незмінним протягом одного запиту (Request), при оновленні сторінки змінюється. <br />
     <code>AddTransient</code> - об'єкт змінюється при кожному зверненні - усі запити інжекції одержать різні об'єкти.
+</p>
+
+<h3>Сервіс генерації випадкових імен файлів (FileNameService)</h3>
+<p>
+    filename (lower case) = @ViewData["lowerCaseFileName"] <br />
+    filename (upper case) = @ViewData["upperCaseFileName"] <br />
+    filename (include numbers) = @ViewData["numbersFileName"] <br />
 </p>

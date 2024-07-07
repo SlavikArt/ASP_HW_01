@@ -2,6 +2,6 @@
 {
     public interface IHashService
     {
-        string Digest(String input);
+        string Digest(string input);
     }
 }

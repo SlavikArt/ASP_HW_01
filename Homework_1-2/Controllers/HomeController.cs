@@ -1,4 +1,5 @@
 using Homework_1_2.Models;
+using Homework_1_2.Services.FileName;
 using Homework_1_2.Services.Hash;
 using Homework_1_2.Services.OTP;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,15 @@ namespace Homework_1_2.Controllers
 
         private readonly IOtpService _otpService;
 
-        public HomeController(ILogger<HomeController> logger, IHashService hashService, IOtpService otpService)
+        private readonly IFileNameService _fileNameService;
+
+        public HomeController(ILogger<HomeController> logger, IHashService hashService,
+            IOtpService otpService, IFileNameService fileNameService)
         {
             _logger = logger;
             _hashService = hashService;
             _otpService = otpService;
+            _fileNameService = fileNameService;
         }
 
         public IActionResult Index()
@@ -50,7 +55,13 @@ namespace Homework_1_2.Controllers
         {
             ViewData["hash"] = _hashService.Digest("123");
             ViewData["hashCode"] = _hashService.GetHashCode();
+
             ViewData["password"] = _otpService.GeneratePassword();
+
+            ViewData["lowerCaseFileName"] = _fileNameService.GenerateRandomFileName(12);
+            ViewData["upperCaseFileName"] = _fileNameService.GenerateRandomFileName(12, true);
+            ViewData["numbersFileName"] = _fileNameService.GenerateRandomFileName(12, false, true);
+
             return View();
         }
 

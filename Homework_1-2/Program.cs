@@ -1,4 +1,6 @@
+using Homework_1_2.Services.FileName;
 using Homework_1_2.Services.Hash;
+using Homework_1_2.Services.KDF;
 using Homework_1_2.Services.OTP;
 
 namespace Homework_1_2
@@ -13,9 +15,12 @@ namespace Homework_1_2
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddSingleton<IHashService, ShaHashService>();
+            builder.Services.AddSingleton<IKdfService, Pbkdf1Service>();
 
             // builder.Services.AddSingleton<IOtpService, Otp6Service>();
             builder.Services.AddSingleton<IOtpService, Otp4Service>();
+
+            builder.Services.AddTransient<IFileNameService, FileNameService>();
 
             var app = builder.Build();
 
